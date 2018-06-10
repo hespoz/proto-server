@@ -3,13 +3,11 @@
 
 const Hapi = require('hapi')
 const mongoose = require('mongoose')
+mongoose.Promise = Promise
 
-mongoose.connect('mongodb://dev:dev@ds247430.mlab.com:47430/protodb')
+mongoose.connect('mongodb://dev:dev123@ds247430.mlab.com:47430/protodb')
 
-const Project = new mongoose.Schema({
-    screenList: { type: Array, default: [] }
-})
-
+const routes = require('./routes')
 
 const server = Hapi.server({
     port: 9000,
@@ -17,26 +15,10 @@ const server = Hapi.server({
 });
 
 
-server.route({
-    method: 'GET',
-    path: '/test',
-    handler: (request, h) => {
-
-        return 'Hello, world!';
-    }
-})
-
-
-server.route({
-    method: 'POST',
-    path: '/save',
-    handler: (request, h) => {
-
-        return 'Hello, world!';
-    }
-})
-
-
+// Add all the routes within the routes folder
+for (var route in routes) {
+    server.route(routes[route]);
+}
 
 
 const init = async () => {
