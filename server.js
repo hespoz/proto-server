@@ -9,7 +9,7 @@ mongoose.connect('mongodb://dev:dev123@ds247430.mlab.com:47430/protodb')
 const routes = require('./routes')
 
 const server = Hapi.server({
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 9000,
     host: '0.0.0.0',
     routes: {
         cors: true
