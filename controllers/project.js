@@ -18,7 +18,18 @@ const saveProject = async (request, h) => {
 
 }
 
+const getProject = async (request, h) => {
+
+    try {
+        return await Project.findById(request.params.id)
+    } catch (err) {
+        console.error(err)
+    }
+
+}
+
 module.exports = {
-    saveProject: saveProject
+    saveProject: saveProject,
+    getProject: getProject
 }
 
