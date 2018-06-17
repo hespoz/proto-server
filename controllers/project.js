@@ -10,6 +10,7 @@ const saveProject = async (request, h) => {
             let res = await newProject.save()
             return res
         } else {
+            let updated = await Project.update({_id:request.payload.id}, {$set:{screenList:request.payload.screenList}}, {upsert:true})
             return request.payload
         }
     } catch (err) {
@@ -21,6 +22,7 @@ const saveProject = async (request, h) => {
 const getProject = async (request, h) => {
 
     try {
+        console.log(await Project.findById(request.params.id))
         return await Project.findById(request.params.id)
     } catch (err) {
         console.error(err)
